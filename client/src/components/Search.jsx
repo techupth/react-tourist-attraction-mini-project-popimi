@@ -10,7 +10,6 @@ function Search() {
         "http://localhost:4001/trips?keywords=" + searchText
       );
       setTravelData(response.data.data);
-      console.log(travelData);
     } catch (error) {
       console.error(error);
     }
@@ -36,7 +35,7 @@ function Search() {
       </section>
       <section className="travel-result-section">
         <div className="travel-result-list">
-          {travelData.map((data, index) => {
+          {travelData.map((data) => {
             return (
               <div className="travel-result-box" key={data.eid}>
                 <figure className="travel-result-image">
@@ -56,7 +55,7 @@ function Search() {
                   <span className="travel-tags-list">
                     หมวด{" "}
                     {data.tags.map((tag, tagIndex) => {
-                      return data.tags.length - 1 !== index ? (
+                      return data.tags.length - 1 !== tagIndex ? (
                         <a
                           key={tagIndex}
                           onClick={() => {
@@ -104,9 +103,7 @@ function Search() {
                     </figure>
                     <a
                       className="btn-clipboard"
-                      onClick={() =>
-                        navigator.clipboard.writeText(`${data.url}`)
-                      }
+                      onClick={() => navigator.clipboard.writeText(data.url)}
                     >
                       Link
                     </a>
