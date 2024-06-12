@@ -21,7 +21,6 @@ function Search() {
   useEffect(() => {
     getTravelData();
   }, [searchText]);
-  console.log(copied);
   return (
     <>
       <section className="search-travel-box">
