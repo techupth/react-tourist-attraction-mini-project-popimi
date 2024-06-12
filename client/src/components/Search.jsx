@@ -4,12 +4,15 @@ import { useState, useEffect } from "react";
 function Search() {
   const [searchText, setSearchText] = useState("");
   const [travelData, setTravelData] = useState([]);
+  const [copied, setCopied] = useState();
+
   const getTravelData = async () => {
     try {
       const response = await axios.get(
         "http://localhost:4001/trips?keywords=" + searchText
       );
       setTravelData(response.data.data);
+      setCopied(response.data.data.map((a) => false));
     } catch (error) {
       console.error(error);
     }
@@ -18,6 +21,7 @@ function Search() {
   useEffect(() => {
     getTravelData();
   }, [searchText]);
+  console.log(copied);
   return (
     <>
       <section className="search-travel-box">
@@ -35,7 +39,7 @@ function Search() {
       </section>
       <section className="travel-result-section">
         <div className="travel-result-list">
-          {travelData.map((data) => {
+          {travelData.map((data, index) => {
             return (
               <div className="travel-result-box" key={data.eid}>
                 <figure className="travel-result-image">
@@ -47,11 +51,17 @@ function Search() {
                   />
                 </figure>
                 <figcaption className="travel-result-detail">
-                  <h2>{data.title}</h2>
+                  <h2>
+                    <a href={data.url} target="_blank">
+                      {data.title}
+                    </a>
+                  </h2>
                   <p>{data.description.slice(0, 100)}...</p>
-                  <a className="read-more" target="_blank" href={data.url}>
-                    อ่านต่อ
-                  </a>
+                  <span>
+                    <a className="read-more" target="_blank" href={data.url}>
+                      อ่านต่อ
+                    </a>
+                  </span>
                   <span className="travel-tags-list">
                     หมวด{" "}
                     {data.tags.map((tag, tagIndex) => {
@@ -59,9 +69,9 @@ function Search() {
                         <a
                           key={tagIndex}
                           onClick={() => {
-                            !searchText
-                              ? setSearchText(tag)
-                              : setSearchText(searchText + " " + tag);
+                            searchText.includes(tag)
+                              ? null
+                              : setSearchText(searchText + tag + " ");
                           }}
                           className="travel-tags"
                         >
@@ -72,9 +82,9 @@ function Search() {
                           และ{" "}
                           <a
                             onClick={() => {
-                              !searchText
-                                ? setSearchText(tag)
-                                : setSearchText(searchText + " " + tag);
+                              searchText.includes(tag)
+                                ? null
+                                : setSearchText(searchText + tag + " ");
                             }}
                             className="travel-tags"
                           >
@@ -103,9 +113,15 @@ function Search() {
                     </figure>
                     <a
                       className="btn-clipboard"
-                      onClick={() => navigator.clipboard.writeText(data.url)}
+                      onClick={() => {
+                        navigator.clipboard.writeText(data.url);
+                        setCopied(copied.toSpliced(index, 1, true));
+                        setTimeout(() => {
+                          setCopied(copied.toSpliced(index, 1, false));
+                        }, 2000);
+                      }}
                     >
-                      Link
+                      {copied[index] ? "Copied!" : "Copy to Clipboard"}
                     </a>
                   </div>
                 </figcaption>
