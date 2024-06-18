@@ -21,6 +21,7 @@ function Search() {
   useEffect(() => {
     getTravelData();
   }, [searchText]);
+
   return (
     <>
       <section className="search-travel-box">
@@ -112,6 +113,10 @@ function Search() {
                     </figure>
                     <a
                       className="btn-clipboard"
+                      style={{
+                        backgroundColor: copied[index] ? "blue" : "white",
+                        color: copied[index] ? "white" : "blue",
+                      }}
                       onClick={() => {
                         navigator.clipboard.writeText(data.url);
                         setCopied(copied.toSpliced(index, 1, true));
