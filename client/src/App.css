@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "kanit";
+}
+/* main */
+.App {
+  padding: 50px 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 50px;
+}
+/* Header and Search bar */
+.header-travel {
+  text-align: center;
+  font-size: 30px;
+  color: rgb(95, 159, 255);
+}
+
+.header-travel h1 {
+  font-weight: 400;
+}
+
+.search-travel-box {
+  width: 50%;
+}
+
+.search-travel-box input {
+  margin: 5px 0;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid silver;
+}
+
+.search-travel-box input::placeholder {
+  text-align: center;
+}
+
+/* Search Result */
+.travel-result-list {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.travel-result-box {
+  display: flex;
+  gap: 25px;
+}
+
+.travel-result-image {
+  display: flex;
+  align-items: center;
+}
+
+.travel-result-image img {
+  border-radius: 30px;
+  object-fit: cover;
+}
+
+.travel-result-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px;
+  flex: 2;
+}
+
+.travel-result-detail h2 > a {
+  font-weight: 500;
+  color: black;
+  text-decoration: none;
+}
+
+.travel-result-detail p {
+  color: grey;
+}
+
+.travel-tags {
+  text-decoration: underline;
+}
+
+.travel-tags-list {
+  color: grey;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.travel-tags-list a {
+  cursor: pointer;
+}
+
+.travel-image-list {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 10px 0;
+}
+
+.travel-image-more {
+  border-radius: 8px;
+  margin: 0 25px 0 0;
+  gap: 20px;
+}
+
+.btn-clipboard {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px;
+  padding: 2px 10px;
+  border-radius: 25px;
+  border: 2px solid blue;
+  transition-duration: 500ms;
+}
+
+.btn-clipboard:hover {
+  color: white;
+  background-color: blue;
+  transition-duration: 500ms;
+}
+
+/* Responsive width 768px below */
+@media screen and (max-width: 768px) {
+  .travel-result-list {
+    gap: 10px;
+  }
+  .travel-result-box {
+    justify-content: center;
+  }
+
+  .travel-result-image {
+    justify-content: center;
+  }
+
+  .travel-image-list {
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .travel-result-box {
+    flex-direction: column;
+  }
+
+  .btn-clipboard {
+    margin: 0;
+  }
+}
